@@ -36,7 +36,7 @@ namespace GetAPet.Domain.Pet
 
         public PetStatus Status { get; }
 
-        public List<Property> Properties { get; } = [];
+        public List<PaymentDetails> PaymantDetailsList { get; } = [];
 
         public DateOnly CreationDate { get; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace GetAPet.Domain.Pet
 {
-    public class Property
+    public class PaymentDetails
     {
         public string Name { get; } = default!;
 
