@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
+using GetAPet.Domain.Shared;
 
-namespace GetAPet.Domain.Pet
+namespace GetAPet.Domain.Pets
 {
     public class Pet
     {

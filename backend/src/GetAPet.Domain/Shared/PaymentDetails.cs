@@ -1,4 +1,4 @@
-﻿namespace GetAPet.Domain.Pet
+﻿namespace GetAPet.Domain.Shared
 {
     public class PaymentDetails
     {
