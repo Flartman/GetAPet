@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using GetAPet.Domain.Shared;
 
 namespace GetAPet.Domain.Pets
@@ -39,7 +40,7 @@ namespace GetAPet.Domain.Pets
 
         public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
 
-        private List<PaymentDetails> _paymantDetailsList { get; } = [];
+        private readonly List<PaymentDetails> _paymantDetailsList = [];
 
         public DateOnly CreationDate { get; }
     }

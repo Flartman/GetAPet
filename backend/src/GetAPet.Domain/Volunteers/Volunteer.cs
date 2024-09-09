@@ -1,5 +1,6 @@
 ﻿using GetAPet.Domain.Pets;
 using GetAPet.Domain.Shared;
+using System.Collections.Generic;
 namespace GetAPet.Domain.Volunteers
 {
     public class Volunteer
@@ -18,15 +19,15 @@ namespace GetAPet.Domain.Volunteers
 
         public IReadOnlyList<SocialNetwork> SocialMedia => _socialMedia;
 
-        private List<SocialNetwork> _socialMedia { get; } = [];
+        private readonly List<SocialNetwork> _socialMedia = [];
 
         public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
 
-        private List<PaymentDetails> _paymantDetailsList { get; } = [];
+        private readonly List<PaymentDetails> _paymantDetailsList = [];
 
         public IReadOnlyList<Pet> Pets => _pets;
 
-        private List<Pet> _pets { get; } = [];
+        private readonly List<Pet> _pets  = [];
 
         public int GetCountPetsThat(PetStatus petStatus)
         {
