@@ -43,5 +43,9 @@ namespace GetAPet.Domain.Pets
         private readonly List<PaymentDetails> _paymantDetailsList = [];
 
         public DateOnly CreationDate { get; }
+
+        public IReadOnlyList<PetPhoto> Photos => _photos;
+
+        private readonly List<PetPhoto> _photos = [];
     }
 }
