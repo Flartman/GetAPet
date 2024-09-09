@@ -28,7 +28,7 @@ namespace GetAPet.Domain.Volunteers
 
         private List<Pet> _pets { get; } = [];
 
-        public int GetPetsThat(PetStatus petStatus)
+        public int GetCountPetsThat(PetStatus petStatus)
         {
             return _pets
                 .Where(p => p.Status == petStatus)
