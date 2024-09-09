@@ -37,7 +37,9 @@ namespace GetAPet.Domain.Pets
 
         public PetStatus Status { get; }
 
-        public List<PaymentDetails> PaymantDetailsList { get; } = [];
+        public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
+
+        private List<PaymentDetails> _paymantDetailsList { get; } = [];
 
         public DateOnly CreationDate { get; }
     }

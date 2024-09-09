@@ -16,17 +16,23 @@ namespace GetAPet.Domain.Volunteers
 
         public string PhoneNumber { get; } = default!;
 
-        public List<SocialNetwork> SocialMedia { get; } = [];
+        public IReadOnlyList<SocialNetwork> SocialMedia => _socialMedia;
 
-        public List<PaymentDetails> PaymantDetailsList { get; } = [];
+        private List<SocialNetwork> _socialMedia { get; } = [];
 
-        private List<Pet> Pets { get; } = [];
+        public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
 
-        public List<Pet> GetPetsThat(PetStatus petStatus)
+        private List<PaymentDetails> _paymantDetailsList { get; } = [];
+
+        public IReadOnlyList<Pet> Pets => _pets;
+
+        private List<Pet> _pets { get; } = [];
+
+        public int GetPetsThat(PetStatus petStatus)
         {
-            return Pets
+            return _pets
                 .Where(p => p.Status == petStatus)
-                .ToList();
+                .Count();
         }
     }
 }
