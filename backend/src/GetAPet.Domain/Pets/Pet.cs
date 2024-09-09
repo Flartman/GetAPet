@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using GetAPet.Domain.Shared;
 
-namespace GetAPet.Domain.Pet
+namespace GetAPet.Domain.Pets
 {
     public class Pet
     {
@@ -36,7 +38,9 @@ namespace GetAPet.Domain.Pet
 
         public PetStatus Status { get; }
 
-        public List<PaymentDetails> PaymantDetailsList { get; } = [];
+        public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
+
+        private readonly List<PaymentDetails> _paymantDetailsList = [];
 
         public DateOnly CreationDate { get; }
     }
