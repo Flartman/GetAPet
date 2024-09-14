@@ -1,6 +1,5 @@
 ﻿using GetAPet.Domain.Pets;
 using GetAPet.Domain.Shared;
-using System.Collections.Generic;
 namespace GetAPet.Domain.Volunteers
 {
     public class Volunteer

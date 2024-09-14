@@ -18,7 +18,7 @@ namespace GetAPet.Domain.Pets
 
         public string Breed { get; } = default!;
 
-        public Color Coloring { get; } = default!;
+        public string Coloring { get; } = default!;
 
         public string HealthInfo { get; } = default!;
 
@@ -49,3 +49,5 @@ namespace GetAPet.Domain.Pets
         private readonly List<PetPhoto> _photos = [];
     }
 }
+
+

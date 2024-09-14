@@ -1,6 +1,6 @@
 ﻿namespace GetAPet.Domain.Shared
 {
-    public class PaymentDetails
+    public record PaymentDetails
     {
         public string Name { get; } = default!;
 

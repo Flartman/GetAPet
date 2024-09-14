@@ -1,6 +1,6 @@
 ﻿namespace GetAPet.Domain.Volunteers
 {
-    public class SocialNetwork
+    public record SocialNetwork
     {
         public string URL { get; } = default!;
 
