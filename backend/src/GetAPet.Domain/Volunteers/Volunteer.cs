@@ -1,5 +1,4 @@
-﻿using GetAPet.Domain.Pets;
-using GetAPet.Domain.Shared;
+﻿using GetAPet.Domain.Volunteers.Pets;
 namespace GetAPet.Domain.Volunteers
 {
     public class Volunteer
@@ -16,13 +15,9 @@ namespace GetAPet.Domain.Volunteers
 
         public string PhoneNumber { get; } = default!;
 
-        public IReadOnlyList<SocialNetwork> SocialMedia => _socialMedia;
+        public SocialMediaStorage? SocialMedia {  get; }
 
-        private readonly List<SocialNetwork> _socialMedia = [];
-
-        public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
-
-        private readonly List<PaymentDetails> _paymantDetailsList = [];
+        public PaymentDetailsStorage? PaymentDetailsStorage { get; }
 
         public IReadOnlyList<Pet> Pets => _pets;
 

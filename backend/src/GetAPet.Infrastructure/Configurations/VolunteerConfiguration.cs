@@ -35,13 +35,38 @@ namespace GetAPet.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_PHONENUMBER_LENGTH);
 
-            builder.HasMany(v => v.SocialMedia)
-                .WithOne()
-                .HasForeignKey("volunteer_id");
+            builder.OwnsOne(v => v.SocialMedia, vb =>
+            {
+                vb.ToJson();
 
-            builder.HasMany(v => v.PaymantDetailsList)
-                .WithOne()
-                .HasForeignKey("volunteer_id");
+                vb.OwnsMany(sms => sms.SocialNetworks, smb =>
+                {
+                    smb.Property(sn => sn.Name)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                    smb.Property(sn => sn.URL)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                });
+
+            });
+
+            builder.OwnsOne(v => v.PaymentDetailsStorage, vb =>
+            {
+                vb.ToJson();
+
+                vb.OwnsMany(pds => pds.PaymantDetailsList, pdb =>
+                {
+                    pdb.Property(pd => pd.Name)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                    pdb.Property(pd => pd.Description)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                });
+            });
 
             builder.HasMany(v => v.Pets);
 

@@ -1,4 +1,4 @@
-﻿namespace GetAPet.Domain.Shared
+﻿namespace GetAPet.Domain.Volunteers
 {
     public record PaymentDetails
     {

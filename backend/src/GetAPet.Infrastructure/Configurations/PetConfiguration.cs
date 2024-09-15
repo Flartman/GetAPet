@@ -1,5 +1,5 @@
-﻿using GetAPet.Domain.Pets;
-using GetAPet.Domain.Shared;
+﻿using GetAPet.Domain.Shared;
+using GetAPet.Domain.Volunteers.Pets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -66,18 +66,40 @@ namespace GetAPet.Infrastructure.Configurations
             builder.Property(p => p.Status)
                 .IsRequired();
 
-            builder.HasMany(p => p.PaymantDetailsList)
-                .WithOne()
-                .HasForeignKey("pet_id")
-                .IsRequired();
+            builder.OwnsOne(p => p.PaymentDetailsStorage, pb =>
+            {
+                pb.ToJson();
+
+                pb.OwnsMany(pds => pds.PaymantDetailsList, pdb =>
+                {
+                    pdb.Property(pd => pd.Name)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                    pdb.Property(pd => pd.Description)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                });
+            });
+
 
             builder.Property(p => p.CreationDate)
                 .IsRequired();
 
-            builder.HasMany(p => p.Photos)
-                .WithOne()
-                .HasForeignKey("pet_id")
-                .IsRequired();
+            builder.OwnsOne(p => p.PhotoAlbum, pb =>
+            {
+                pb.ToJson();
+
+                pb.OwnsMany(pa => pa.Photos, pab =>
+                {
+                    pab.Property(ph => ph.IsMain)
+                    .IsRequired();
+
+                    pab.Property(ph => ph.PathToFile)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                });
+            });
         }
     }
 }

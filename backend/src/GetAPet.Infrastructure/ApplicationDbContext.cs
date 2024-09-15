@@ -5,7 +5,8 @@ using Microsoft.Extensions.Logging;
 
 namespace GetAPet.Infrastructure
 {
-    public class ApplicationDbContext(IConfiguration configuration) : DbContext
+    public class ApplicationDbContext(IConfiguration configuration) 
+        : DbContext
     {
         private const string DATABASE = "Database";
 
