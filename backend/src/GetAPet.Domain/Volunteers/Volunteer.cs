@@ -25,7 +25,6 @@ namespace GetAPet.Domain.Volunteers
 
         public int GetCountPetsThat(PetStatus petStatus)
         {
-            PaymentDetailsStorage.PaymantDetailsList.
             return _pets
                 .Where(p => p.Status == petStatus)
                 .Count();
