@@ -1,4 +1,4 @@
-﻿namespace GetAPet.Domain.Pets
+﻿namespace GetAPet.Domain.Volunteers.Pets
 {
     public enum PetStatus
     {

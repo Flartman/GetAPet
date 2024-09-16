@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using GetAPet.Domain.Shared;
 
-namespace GetAPet.Domain.Pets
+namespace GetAPet.Domain.Volunteers.Pets
 {
     public class Pet
     {
         public Guid Id { get; }
-
-        public Guid VolunteerId { get; }
 
         public string Name { get; } = default!;
 
@@ -18,7 +15,7 @@ namespace GetAPet.Domain.Pets
 
         public string Breed { get; } = default!;
 
-        public Color Coloring { get; } = default!;
+        public string Coloring { get; } = default!;
 
         public string HealthInfo { get; } = default!;
 
@@ -38,14 +35,12 @@ namespace GetAPet.Domain.Pets
 
         public PetStatus Status { get; }
 
-        public IReadOnlyList<PaymentDetails> PaymantDetailsList => _paymantDetailsList;
-
-        private readonly List<PaymentDetails> _paymantDetailsList = [];
+        public PaymentDetailsStorage? PaymentDetailsStorage { get; }
 
         public DateOnly CreationDate { get; }
 
-        public IReadOnlyList<PetPhoto> Photos => _photos;
-
-        private readonly List<PetPhoto> _photos = [];
+        public PetPhotoAlbum? PhotoAlbum { get; }
     }
 }
+
+
