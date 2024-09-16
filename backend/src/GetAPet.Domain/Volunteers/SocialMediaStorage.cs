@@ -2,8 +2,6 @@
 {
     public record SocialMediaStorage
     {
-        public IReadOnlyList<SocialNetwork> SocialNetworks => _socialNetworks;
-
-        private readonly List<SocialNetwork> _socialNetworks = [];
+        public IReadOnlyList<SocialNetwork> SocialNetworks = [];
     }
 }

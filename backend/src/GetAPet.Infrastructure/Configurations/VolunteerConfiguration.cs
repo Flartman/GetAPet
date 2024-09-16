@@ -68,7 +68,9 @@ namespace GetAPet.Infrastructure.Configurations
                 });
             });
 
-            builder.HasMany(v => v.Pets);
+            builder.HasMany(v => v.Pets)
+                .WithOne()
+                .HasForeignKey("volunteer_id");
 
 
         }

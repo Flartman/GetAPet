@@ -2,8 +2,6 @@
 {
     public record PetPhotoAlbum
     {
-        public IReadOnlyList<PetPhoto> Photos => _photos;
-
-        private readonly List<PetPhoto> _photos = [];
+        public IReadOnlyList<PetPhoto> Photos = [];
     }
 }
