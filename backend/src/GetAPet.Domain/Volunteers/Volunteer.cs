@@ -1,12 +1,15 @@
+<<<<<<< Updated upstream
 ﻿using GetAPet.Domain.Pets;
 using GetAPet.Domain.Shared;
 using System.Collections.Generic;
+=======
+﻿using GetAPet.Domain.Shared;
+using GetAPet.Domain.Volunteers.Pets;
+>>>>>>> Stashed changes
 namespace GetAPet.Domain.Volunteers
 {
-    public class Volunteer
+    public class Volunteer(Guid id) : Entity(id)
     {
-        public Guid Id { get; }
-
         public string FullName { get; } = default!;
 
         public string Email { get; } = default!;

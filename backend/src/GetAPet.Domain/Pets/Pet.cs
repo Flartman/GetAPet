@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using GetAPet.Domain.Shared;
+using System.Collections.Generic;
 using System.Drawing;
 using GetAPet.Domain.Shared;
 
 namespace GetAPet.Domain.Pets
 {
-    public class Pet
+    public class Pet(Guid id) : Entity(id)
     {
-        public Guid Id { get; }
 
         public Guid VolunteerId { get; }
 
