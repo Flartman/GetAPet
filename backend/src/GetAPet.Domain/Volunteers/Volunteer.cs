@@ -1,10 +1,9 @@
-﻿using GetAPet.Domain.Volunteers.Pets;
+﻿using GetAPet.Domain.Shared;
+using GetAPet.Domain.Volunteers.Pets;
 namespace GetAPet.Domain.Volunteers
 {
-    public class Volunteer
+    public class Volunteer(Guid id) : Entity(id)
     {
-        public Guid Id { get; }
-
         public string FullName { get; } = default!;
 
         public string Email { get; } = default!;
