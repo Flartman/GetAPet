@@ -1,12 +1,12 @@
 ﻿namespace GetAPet.Domain.Shared
 {
-    public abstract class Entity
+    public abstract class Entity<TId>
     {
-        protected Entity(Guid id)
+        protected Entity(TId id)
         {
             Id = id;
         }
 
-        public Guid Id { get; }
+        public TId Id { get; }
     }
 }

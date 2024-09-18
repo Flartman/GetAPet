@@ -2,7 +2,7 @@
 
 namespace GetAPet.Domain.Volunteers.Pets
 {
-    public class Pet(Guid id) : Entity(id)
+    public class Pet(PetId id) : Entity<PetId>(id)
     {
         public string Name { get; } = default!;
 
@@ -16,7 +16,7 @@ namespace GetAPet.Domain.Volunteers.Pets
 
         public string HealthInfo { get; } = default!;
 
-        public string Address { get; } = default!;
+        public Address Address { get; } = default!;
 
         public double Weight { get; }
 
