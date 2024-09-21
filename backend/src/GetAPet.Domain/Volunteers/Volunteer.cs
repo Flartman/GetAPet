@@ -2,9 +2,9 @@
 using GetAPet.Domain.Volunteers.Pets;
 namespace GetAPet.Domain.Volunteers
 {
-    public class Volunteer(Guid id) : Entity(id)
+    public class Volunteer(VolunteerId id) : Entity<VolunteerId>(id)
     {
-        public string FullName { get; } = default!;
+        public FullName? FullName { get; }
 
         public string Email { get; } = default!;
 

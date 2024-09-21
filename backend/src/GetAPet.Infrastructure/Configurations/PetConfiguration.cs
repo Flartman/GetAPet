@@ -1,11 +1,12 @@
 ﻿using GetAPet.Domain.Shared;
+using GetAPet.Domain.Volunteers;
 using GetAPet.Domain.Volunteers.Pets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GetAPet.Infrastructure.Configurations
 {
-    internal class PetConfiguration : IEntityTypeConfiguration<Pet>
+    public class PetConfiguration : IEntityTypeConfiguration<Pet>
     {
         public void Configure(EntityTypeBuilder<Pet> builder)
         {
@@ -14,7 +15,10 @@ namespace GetAPet.Infrastructure.Configurations
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id)
-                .IsRequired();
+                .IsRequired()
+                .HasConversion(
+                    id => id.Value,
+                    value => PetId.Create(value));
 
             builder.Property(p => p.Name)
                 .IsRequired()
@@ -40,9 +44,36 @@ namespace GetAPet.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
 
-            builder.Property(p => p.Address)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+            builder.ComplexProperty(p => p.Address, pb =>
+            {
+                pb.Property(address => address.Country)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                pb.Property(address => address.Region)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                pb.Property(address => address.City)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                pb.Property(address => address.Street)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+
+                pb.Property(address => address.HouseNumber)
+                    .IsRequired();
+
+                pb.Property(address => address.EntranceNumber)
+                    .IsRequired();
+
+                pb.Property(address => address.FloorNumber)
+                    .IsRequired();
+
+                pb.Property(address => address.ApartmentNumber)
+                    .IsRequired();
+            });
 
             builder.Property(p => p.Weight)
                 .IsRequired();

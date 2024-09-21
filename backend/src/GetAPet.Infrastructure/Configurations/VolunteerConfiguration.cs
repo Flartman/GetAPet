@@ -14,11 +14,23 @@ namespace GetAPet.Infrastructure.Configurations
             builder.HasKey(v => v.Id);
 
             builder.Property(v => v.Id)
-                .IsRequired();
-
-            builder.Property(v => v.FullName)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasConversion(
+                    id => id.Value,
+                    value => VolunteerId.Create(value));
+
+            builder.OwnsOne(v => v.FullName, vb =>
+            {
+                vb.Property(fn => fn.Surname)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                vb.Property(fn => fn.Name)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                vb.Property(fn => fn.Patronymic)
+                    .IsRequired(false)
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+            });
 
             builder.Property(v => v.Email)
                 .IsRequired()
