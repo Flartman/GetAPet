@@ -4,12 +4,6 @@ namespace GetAPet.Domain.Volunteers.Pets
 {
     public record PetPhoto
     {
-        //ef core
-        private PetPhoto()
-        {
-
-        }
-
         private PetPhoto(string pathToFile, bool isMain)
         {
             PathToFile = pathToFile;

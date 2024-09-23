@@ -4,12 +4,6 @@ namespace GetAPet.Domain.Volunteers
 {
     public record PaymentDetails
     {
-        //ef core
-        private PaymentDetails()
-        {
-
-        }
-
         private PaymentDetails(string name, string description)
         {
             Name = name;

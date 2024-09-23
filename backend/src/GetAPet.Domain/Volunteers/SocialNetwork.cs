@@ -4,12 +4,6 @@ namespace GetAPet.Domain.Volunteers
 {
     public record SocialNetwork
     {
-        //ef core
-        private SocialNetwork()
-        {
-
-        }
-
         private SocialNetwork(string url, string name)
         {
             URL = url;
