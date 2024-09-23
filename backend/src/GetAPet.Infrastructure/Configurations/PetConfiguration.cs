@@ -20,59 +20,79 @@ namespace GetAPet.Infrastructure.Configurations
                     id => id.Value,
                     value => PetId.Create(value));
 
-            builder.Property(p => p.Name)
+            builder.ComplexProperty(pet => pet.Name, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("name");
+            });
 
-            builder.Property(p => p.Species)
+            builder.ComplexProperty(pet => pet.Species, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("species");
+            });
 
-            builder.Property(p => p.Description)
+            builder.ComplexProperty(pet => pet.Description, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasColumnName("description");
+            });
 
-            builder.Property(p => p.Breed)
+            builder.ComplexProperty(pet => pet.Breed, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("breed");
+            });
 
-            builder.Property(p => p.Coloring)
+            builder.ComplexProperty(pet => pet.Coloring, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("coloring");
+            });
 
-            builder.Property(p => p.HealthInfo)
+            builder.ComplexProperty(pet => pet.HealthInfo, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasColumnName("health_info");
+            });
 
             builder.ComplexProperty(p => p.Address, pb =>
             {
-                pb.Property(address => address.Country)
+                pb.ComplexProperty(address => address.Country, sb =>
+                {
+                    sb.Property(nes => nes.Value)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("country");
+                });
 
-                pb.Property(address => address.Region)
+                pb.ComplexProperty(address => address.Region, sb =>
+                {
+                    sb.Property(nes => nes.Value)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("region");
+                });
 
-                pb.Property(address => address.City)
+                pb.ComplexProperty(address => address.City, sb =>
+                {
+                    sb.Property(nes => nes.Value)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
-
-                pb.Property(address => address.Street)
-                    .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
-
-                pb.Property(address => address.HouseNumber)
-                    .IsRequired();
-
-                pb.Property(address => address.EntranceNumber)
-                    .IsRequired();
-
-                pb.Property(address => address.FloorNumber)
-                    .IsRequired();
-
-                pb.Property(address => address.ApartmentNumber)
-                    .IsRequired();
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("city");
+                });
             });
 
             builder.Property(p => p.Weight)
@@ -81,9 +101,15 @@ namespace GetAPet.Infrastructure.Configurations
             builder.Property(p => p.Height)
                 .IsRequired();
 
-            builder.Property(p => p.PhoneNumber)
+
+            builder.ComplexProperty(pet => pet.PhoneNumber, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_PHONENUMBER_LENGTH);
+                .HasMaxLength(Constants.MAX_PHONENUMBER_LENGTH)
+                .HasColumnName("phonenumber");
+            });
+
 
             builder.Property(p => p.IsNeutered)
                 .IsRequired();
