@@ -1,9 +1,14 @@
-﻿using GetAPet.Domain.Shared;
-
+﻿
 namespace GetAPet.Domain.Volunteers
 {
     public record SocialNetwork
     {
+        //efcore 
+        private SocialNetwork()
+        {
+
+        }
+
         private SocialNetwork(string url, string name)
         {
             URL = url;

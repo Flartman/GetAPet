@@ -5,6 +5,8 @@ namespace GetAPet.Domain.Volunteers
 {
     public record FullName
     {
+        //ef core
+        private FullName() { }
         private FullName(string surname, string name, string patronymic)
         {
             Surname = new(surname);

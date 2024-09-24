@@ -4,6 +4,12 @@ namespace GetAPet.Domain.Volunteers.Pets
 {
     public record Address
     {
+        //efcore 
+        private Address()
+        {
+
+        }
+
         private Address(string country, string region, string city)
         {
             Country= new NotEmptyString(country);
