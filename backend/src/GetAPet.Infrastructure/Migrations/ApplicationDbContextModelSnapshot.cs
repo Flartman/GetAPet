@@ -33,33 +33,9 @@ namespace GetAPet.Infrastructure.Migrations
                         .HasColumnType("date")
                         .HasColumnName("birthdate");
 
-                    b.Property<string>("Breed")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("breed");
-
-                    b.Property<string>("Coloring")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("coloring");
-
                     b.Property<DateOnly>("CreationDate")
                         .HasColumnType("date")
                         .HasColumnName("creation_date");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("HealthInfo")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("health_info");
 
                     b.Property<double>("Height")
                         .HasColumnType("double precision")
@@ -72,24 +48,6 @@ namespace GetAPet.Infrastructure.Migrations
                     b.Property<bool>("IsVaccinated")
                         .HasColumnType("boolean")
                         .HasColumnName("is_vaccinated");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)")
-                        .HasColumnName("phone_number");
-
-                    b.Property<string>("Species")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("species");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")
@@ -107,45 +65,115 @@ namespace GetAPet.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("ApartmentNumber")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_apartment_number");
+                            b1.ComplexProperty<Dictionary<string, object>>("City", "GetAPet.Domain.Volunteers.Pets.Pet.Address#Address.City#NotEmptyString", b2 =>
+                                {
+                                    b2.IsRequired();
 
-                            b1.Property<string>("City")
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("character varying(100)")
+                                        .HasColumnName("city");
+                                });
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Country", "GetAPet.Domain.Volunteers.Pets.Pet.Address#Address.Country#NotEmptyString", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("character varying(100)")
+                                        .HasColumnName("country");
+                                });
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Region", "GetAPet.Domain.Volunteers.Pets.Pet.Address#Address.Region#NotEmptyString", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("character varying(100)")
+                                        .HasColumnName("region");
+                                });
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Breed", "GetAPet.Domain.Volunteers.Pets.Pet.Breed#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasMaxLength(100)
                                 .HasColumnType("character varying(100)")
-                                .HasColumnName("address_city");
+                                .HasColumnName("breed");
+                        });
 
-                            b1.Property<string>("Country")
+                    b.ComplexProperty<Dictionary<string, object>>("Coloring", "GetAPet.Domain.Volunteers.Pets.Pet.Coloring#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasMaxLength(100)
                                 .HasColumnType("character varying(100)")
-                                .HasColumnName("address_country");
+                                .HasColumnName("coloring");
+                        });
 
-                            b1.Property<int>("EntranceNumber")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_entrance_number");
+                    b.ComplexProperty<Dictionary<string, object>>("Description", "GetAPet.Domain.Volunteers.Pets.Pet.Description#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
 
-                            b1.Property<int>("FloorNumber")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_floor_number");
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(2000)
+                                .HasColumnType("character varying(2000)")
+                                .HasColumnName("description");
+                        });
 
-                            b1.Property<int>("HouseNumber")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_house_number");
+                    b.ComplexProperty<Dictionary<string, object>>("HealthInfo", "GetAPet.Domain.Volunteers.Pets.Pet.HealthInfo#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
 
-                            b1.Property<string>("Region")
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(2000)
+                                .HasColumnType("character varying(2000)")
+                                .HasColumnName("health_info");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Name", "GetAPet.Domain.Volunteers.Pets.Pet.Name#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasMaxLength(100)
                                 .HasColumnType("character varying(100)")
-                                .HasColumnName("address_region");
+                                .HasColumnName("name");
+                        });
 
-                            b1.Property<string>("Street")
+                    b.ComplexProperty<Dictionary<string, object>>("PhoneNumber", "GetAPet.Domain.Volunteers.Pets.Pet.PhoneNumber#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("character varying(11)")
+                                .HasColumnName("phonenumber");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Species", "GetAPet.Domain.Volunteers.Pets.Pet.Species#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasMaxLength(100)
                                 .HasColumnType("character varying(100)")
-                                .HasColumnName("address_street");
+                                .HasColumnName("species");
                         });
 
                     b.HasKey("Id")
@@ -163,27 +191,71 @@ namespace GetAPet.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("email");
-
                     b.Property<int>("ExperienceInYears")
                         .HasColumnType("integer")
                         .HasColumnName("experience_in_years");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)")
-                        .HasColumnName("phone_number");
+                    b.ComplexProperty<Dictionary<string, object>>("Description", "GetAPet.Domain.Volunteers.Volunteer.Description#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(2000)
+                                .HasColumnType("character varying(2000)")
+                                .HasColumnName("description");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Email", "GetAPet.Domain.Volunteers.Volunteer.Email#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("character varying(100)")
+                                .HasColumnName("email");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("FullName", "GetAPet.Domain.Volunteers.Volunteer.FullName#FullName", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Name", "GetAPet.Domain.Volunteers.Volunteer.FullName#FullName.Name#NotEmptyString", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .ValueGeneratedOnUpdateSometimes()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("character varying(100)")
+                                        .HasColumnName("surname");
+                                });
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Surname", "GetAPet.Domain.Volunteers.Volunteer.FullName#FullName.Surname#NotEmptyString", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Value")
+                                        .IsRequired()
+                                        .ValueGeneratedOnUpdateSometimes()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("character varying(100)")
+                                        .HasColumnName("surname");
+                                });
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("PhoneNumber", "GetAPet.Domain.Volunteers.Volunteer.PhoneNumber#NotEmptyString", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(11)
+                                .HasColumnType("character varying(11)")
+                                .HasColumnName("phonenumber");
+                        });
 
                     b.HasKey("Id")
                         .HasName("pk_volunteers");
@@ -300,38 +372,6 @@ namespace GetAPet.Infrastructure.Migrations
 
             modelBuilder.Entity("GetAPet.Domain.Volunteers.Volunteer", b =>
                 {
-                    b.OwnsOne("GetAPet.Domain.Volunteers.FullName", "FullName", b1 =>
-                        {
-                            b1.Property<Guid>("VolunteerId")
-                                .HasColumnType("uuid")
-                                .HasColumnName("id");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("full_name_name");
-
-                            b1.Property<string>("Patronymic")
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("full_name_patronymic");
-
-                            b1.Property<string>("Surname")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
-                                .HasColumnName("full_name_surname");
-
-                            b1.HasKey("VolunteerId");
-
-                            b1.ToTable("volunteers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("VolunteerId")
-                                .HasConstraintName("fk_volunteers_volunteers_id");
-                        });
-
                     b.OwnsOne("GetAPet.Domain.Volunteers.SocialMediaStorage", "SocialMedia", b1 =>
                         {
                             b1.Property<Guid>("VolunteerId")
@@ -427,8 +467,6 @@ namespace GetAPet.Infrastructure.Migrations
 
                             b1.Navigation("PaymantDetailsList");
                         });
-
-                    b.Navigation("FullName");
 
                     b.Navigation("PaymentDetailsStorage");
 

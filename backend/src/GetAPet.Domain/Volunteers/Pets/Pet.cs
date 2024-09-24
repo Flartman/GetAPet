@@ -2,19 +2,25 @@
 
 namespace GetAPet.Domain.Volunteers.Pets
 {
-    public class Pet(PetId id) : Entity<PetId>(id)
+    public class Pet : Entity<PetId>
     {
-        public string Name { get; } = default!;
+        //ef core
+        private Pet(PetId id) : base(id)
+        {
 
-        public string Species { get; } = default!;
+        }
 
-        public string Description { get; } = default!;
+        public NotEmptyString Name { get; } = default!;
 
-        public string Breed { get; } = default!;
+        public NotEmptyString Species { get; } = default!;
 
-        public string Coloring { get; } = default!;
+        public NotEmptyString Description { get; } = default!;
 
-        public string HealthInfo { get; } = default!;
+        public NotEmptyString Breed { get; } = default!;
+
+        public NotEmptyString Coloring { get; } = default!;
+
+        public NotEmptyString HealthInfo { get; } = default!;
 
         public Address Address { get; } = default!;
 
@@ -22,7 +28,7 @@ namespace GetAPet.Domain.Volunteers.Pets
 
         public double Height { get; }
 
-        public string PhoneNumber { get; } = default!;
+        public NotEmptyString PhoneNumber { get; } = default!;
 
         public bool IsNeutered { get; }
 

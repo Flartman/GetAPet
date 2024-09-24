@@ -2,17 +2,23 @@
 using GetAPet.Domain.Volunteers.Pets;
 namespace GetAPet.Domain.Volunteers
 {
-    public class Volunteer(VolunteerId id) : Entity<VolunteerId>(id)
+    public class Volunteer : Entity<VolunteerId>
     {
-        public FullName? FullName { get; }
+        //ef core
+        private Volunteer(VolunteerId id) : base(id)
+        {
 
-        public string Email { get; } = default!;
+        }
 
-        public string Description { get; } = default!;
+        public FullName FullName { get; } = default!;
+
+        public NotEmptyString Email { get; } = default!;
+
+        public NotEmptyString Description { get; } = default!;
 
         public int ExperienceInYears { get; }
 
-        public string PhoneNumber { get; } = default!;
+        public NotEmptyString PhoneNumber { get; } = default!;
 
         public SocialMediaStorage? SocialMedia {  get; }
 

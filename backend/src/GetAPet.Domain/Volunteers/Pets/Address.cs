@@ -1,21 +1,26 @@
-﻿namespace GetAPet.Domain.Volunteers.Pets
+﻿using GetAPet.Domain.Shared;
+
+namespace GetAPet.Domain.Volunteers.Pets
 {
     public record Address
     {
-        public string Country { get; } = default!;
+        private Address(string country, string region, string city)
+        {
+            Country= new NotEmptyString(country);
+            Region = new NotEmptyString(region);
+            City = new NotEmptyString(city);
+        }
 
-        public string Region { get; } = default!;
+        public NotEmptyString Country { get; } = default!;
 
-        public string City { get; } = default!;
+        public NotEmptyString Region { get; } = default!;
 
-        public string Street { get; } = default!;
+        public NotEmptyString City { get; } = default!;
 
-        public int HouseNumber { get; }
+        public static Address Create(string country, string region, string city)
+        {
+            return new Address(country, region, city);
+        }
 
-        public int EntranceNumber { get; }
-
-        public int FloorNumber { get; }
-
-        public int ApartmentNumber { get; }
     }
 }

@@ -19,33 +19,60 @@ namespace GetAPet.Infrastructure.Configurations
                     id => id.Value,
                     value => VolunteerId.Create(value));
 
-            builder.OwnsOne(v => v.FullName, vb =>
+            builder.ComplexProperty(v => v.FullName , fnb =>
             {
-                vb.Property(fn => fn.Surname)
+                fnb.ComplexProperty(fn => fn.Surname, sb =>
+                {
+                    sb.Property(nes => nes.Value)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
-                vb.Property(fn => fn.Name)
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("surname");
+                });
+
+                fnb.ComplexProperty(fn => fn.Name, sb =>
+                {
+                    sb.Property(nes => nes.Value)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
-                vb.Property(fn => fn.Patronymic)
-                    .IsRequired(false)
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("surname");
+                });
+
+                fnb.ComplexProperty(fn => fn.Name, sb =>
+                {
+                    sb.Property(nes => nes.Value)
+                    .IsRequired()
+                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasColumnName("surname");
+                });
+            }) ;
+
+            builder.ComplexProperty(v => v.Email, sb =>
+            {
+                sb.Property(nes => nes.Value)
+                .IsRequired()
+                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasColumnName("email");
             });
 
-            builder.Property(v => v.Email)
+            builder.ComplexProperty(v => v.Description, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasColumnName("description");
+            });
 
-            builder.Property(v => v.Description)
+            builder.ComplexProperty(v => v.PhoneNumber, sb =>
+            {
+                sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                .HasMaxLength(Constants.MAX_PHONENUMBER_LENGTH)
+                .HasColumnName("phonenumber");
+            });
+
 
             builder.Property(v => v.ExperienceInYears)
                 .IsRequired();
-
-            builder.Property(v => v.PhoneNumber)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_PHONENUMBER_LENGTH);
 
             builder.OwnsOne(v => v.SocialMedia, vb =>
             {
