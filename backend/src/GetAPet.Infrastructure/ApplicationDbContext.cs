@@ -1,4 +1,5 @@
 ﻿using GetAPet.Domain.Volunteers;
+using GetAPet.Domain.Volunteers.Pets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ namespace GetAPet.Infrastructure
         private const string DATABASE = "Database";
 
         public DbSet<Volunteer> Volunteers => Set<Volunteer>();
+        public DbSet<Species> Species => Set<Species>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

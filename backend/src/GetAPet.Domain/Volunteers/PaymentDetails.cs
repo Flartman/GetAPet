@@ -9,6 +9,7 @@ namespace GetAPet.Domain.Volunteers
             Name = name;
             Description = description;
         }
+
         public string Name { get; } = default!;
 
         public string Description { get; } = default!;

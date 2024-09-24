@@ -12,11 +12,7 @@ namespace GetAPet.Domain.Volunteers.Pets
 
         public NotEmptyString Name { get; } = default!;
 
-        public NotEmptyString Species { get; } = default!;
-
         public NotEmptyString Description { get; } = default!;
-
-        public NotEmptyString Breed { get; } = default!;
 
         public NotEmptyString Coloring { get; } = default!;
 
@@ -43,6 +39,8 @@ namespace GetAPet.Domain.Volunteers.Pets
         public DateOnly CreationDate { get; }
 
         public PetPhotoAlbum? PhotoAlbum { get; }
+
+        public AnimalDetails AnimalDetails { get; } = default!;
     }
 }
 

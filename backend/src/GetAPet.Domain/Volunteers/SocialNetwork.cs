@@ -22,7 +22,7 @@ namespace GetAPet.Domain.Volunteers
             if(string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            return new(url, name);
+            return new SocialNetwork(url, name);
         }
     }
 }
