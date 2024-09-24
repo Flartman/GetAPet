@@ -17,6 +17,12 @@ namespace GetAPet.Domain.Volunteers.Pets
 
         public string City { get; } = default!;
 
-        public static Address Create(string country, string region, string city) => new (country, region, city);
+        public static Address Create(string country, string region, string city)
+        {
+            if(country is null || region is null || city is null) 
+                throw new ArgumentNullException();
+            return new(country, region, city);
+        }
+            
     }
 }

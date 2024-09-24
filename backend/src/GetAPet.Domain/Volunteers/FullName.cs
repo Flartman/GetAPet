@@ -20,6 +20,9 @@ namespace GetAPet.Domain.Volunteers
 
         public static FullName Create(string surname, string name, string patronymic = "")
         {
+            if (surname is null || name is null)
+                throw new ArgumentNullException();
+
             return new FullName(surname, name, patronymic);
         }
     }
