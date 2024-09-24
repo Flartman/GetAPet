@@ -18,33 +18,24 @@ namespace GetAPet.Infrastructure.Configurations
                 .HasConversion(
                     id => id.Value,
                     value => VolunteerId.Create(value));
-            
-            builder.ComplexProperty(v => v.FullName , fnb =>
+
+            builder.ComplexProperty(v => v.FullName, fnb =>
             {
-                fnb.ComplexProperty(fn => fn.Surname, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                fnb.Property(fn => fn.Surname)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                     .HasColumnName("surname");
-                });
 
-                fnb.ComplexProperty(fn => fn.Name, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                fnb.Property(fn => fn.Name)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
-                    .HasColumnName("surname");
-                });
+                    .HasColumnName("name");
 
-                fnb.ComplexProperty(fn => fn.Name, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                fnb.Property(fn => fn.Patronymic)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
-                    .HasColumnName("surname");
-                });
-            }) ;
+                    .HasColumnName("patronymic");
+            });
 
             builder.ComplexProperty(v => v.Email, sb =>
             {
@@ -81,12 +72,12 @@ namespace GetAPet.Infrastructure.Configurations
                 vb.OwnsMany(sms => sms.SocialNetworks, smb =>
                 {
                     smb.Property(sn => sn.Name)
-                    .IsRequired()
-                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
+                        .IsRequired()
+                        .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
 
-                    smb.Property(sn => sn.URL)
-                    .IsRequired()
-                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
+                    smb.Property(sn => sn.Url)
+                        .IsRequired()
+                        .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
                 });
             });
 
@@ -97,12 +88,12 @@ namespace GetAPet.Infrastructure.Configurations
                 vb.OwnsMany(pds => pds.PaymantDetailsList, pdb =>
                 {
                     pdb.Property(pd => pd.Name)
-                    .IsRequired()
-                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
+                        .IsRequired()
+                        .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
 
                     pdb.Property(pd => pd.Description)
-                    .IsRequired()
-                    .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH);
+                        .IsRequired()
+                        .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH);
                 });
             });
 

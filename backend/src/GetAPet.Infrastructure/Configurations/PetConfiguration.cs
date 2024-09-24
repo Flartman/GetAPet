@@ -68,32 +68,22 @@ namespace GetAPet.Infrastructure.Configurations
                 .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH)
                 .HasColumnName("health_info");
             });
-            
+
             builder.ComplexProperty(p => p.Address, pb =>
             {
-                pb.ComplexProperty(address => address.Country, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.Country)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                     .HasColumnName("country");
-                });
 
-                pb.ComplexProperty(address => address.Region, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.Region)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                     .HasColumnName("region");
-                });
-
-                pb.ComplexProperty(address => address.City, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.City)
                     .IsRequired()
                     .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
-                    .HasColumnName("city");
-                });
+                    .HasColumnName("country");
             });
 
             builder.Property(p => p.Weight)

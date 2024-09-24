@@ -3,19 +3,13 @@ namespace GetAPet.Domain.Volunteers
 {
     public record SocialNetwork
     {
-        //efcore 
-        private SocialNetwork()
-        {
-
-        }
-
         private SocialNetwork(string url, string name)
         {
-            URL = url;
+            Url = url;
             Name = name;
         }
 
-        public string URL { get; } = default!;
+        public string Url { get; } = default!;
 
         public string Name { get; } = default!;
 
