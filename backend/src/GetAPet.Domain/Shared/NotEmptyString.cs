@@ -17,10 +17,5 @@ namespace GetAPet.Domain.Shared
         }
 
         public string Value { get; } 
-
-        public override string ToString()
-        {
-            return Value;
-        }
     }
 }

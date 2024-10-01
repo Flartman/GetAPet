@@ -12,6 +12,19 @@ namespace GetAPet.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "species",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_species", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "volunteers",
                 columns: table => new
                 {
@@ -19,6 +32,8 @@ namespace GetAPet.Infrastructure.Migrations
                     experience_in_years = table.Column<int>(type: "integer", nullable: false),
                     description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
                     email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    patronymic = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     surname = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     phonenumber = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
                     payment_details_storage = table.Column<string>(type: "jsonb", nullable: true),
@@ -27,6 +42,25 @@ namespace GetAPet.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_volunteers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "breeds",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    species_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    desctiption = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_breeds", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_breeds_species_species_id",
+                        column: x => x.species_id,
+                        principalTable: "species",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -42,16 +76,15 @@ namespace GetAPet.Infrastructure.Migrations
                     status = table.Column<int>(type: "integer", nullable: false),
                     creation_date = table.Column<DateOnly>(type: "date", nullable: false),
                     volunteer_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    city = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     country = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     region = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    breed = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    breed_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    species_id = table.Column<Guid>(type: "uuid", nullable: false),
                     coloring = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     description = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
                     health_info = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     phonenumber = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
-                    species = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     payment_details_storage = table.Column<string>(type: "jsonb", nullable: true),
                     photo_album = table.Column<string>(type: "jsonb", nullable: true)
                 },
@@ -66,6 +99,11 @@ namespace GetAPet.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "ix_breeds_species_id",
+                table: "breeds",
+                column: "species_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_pets_volunteer_id",
                 table: "pets",
                 column: "volunteer_id");
@@ -75,7 +113,13 @@ namespace GetAPet.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "breeds");
+
+            migrationBuilder.DropTable(
                 name: "pets");
+
+            migrationBuilder.DropTable(
+                name: "species");
 
             migrationBuilder.DropTable(
                 name: "volunteers");

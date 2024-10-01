@@ -24,39 +24,40 @@ namespace GetAPet.Infrastructure.Configurations
             {
                 sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                 .HasColumnName("name");
             });
 
-            builder.ComplexProperty(pet => pet.Species, sb =>
+            builder.ComplexProperty(pet => pet.AnimalDetails, pb =>
             {
-                sb.Property(nes => nes.Value)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
-                .HasColumnName("species");
+                pb.Property(ad => ad.SpeciesId)
+                    .HasConversion(
+                        id => id.Value, 
+                        value => SpeciesId.Create(value))
+                    .IsRequired()
+                    .HasColumnName("species_id");
+
+                pb.Property(ad => ad.BreedId)
+                    .HasConversion(
+                            id => id.Value,
+                            value => BreedId.Create(value))
+                    .IsRequired()
+                    .HasColumnName("breed_id");
             });
 
             builder.ComplexProperty(pet => pet.Description, sb =>
             {
                 sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH)
                 .HasColumnName("description");
-            });
-
-            builder.ComplexProperty(pet => pet.Breed, sb =>
-            {
-                sb.Property(nes => nes.Value)
-                .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
-                .HasColumnName("breed");
             });
 
             builder.ComplexProperty(pet => pet.Coloring, sb =>
             {
                 sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                 .HasColumnName("coloring");
             });
 
@@ -64,35 +65,25 @@ namespace GetAPet.Infrastructure.Configurations
             {
                 sb.Property(nes => nes.Value)
                 .IsRequired()
-                .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH)
+                .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH)
                 .HasColumnName("health_info");
             });
 
             builder.ComplexProperty(p => p.Address, pb =>
             {
-                pb.ComplexProperty(address => address.Country, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.Country)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                     .HasColumnName("country");
-                });
 
-                pb.ComplexProperty(address => address.Region, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.Region)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
+                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
                     .HasColumnName("region");
-                });
-
-                pb.ComplexProperty(address => address.City, sb =>
-                {
-                    sb.Property(nes => nes.Value)
+                pb.Property(a => a.City)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH)
-                    .HasColumnName("city");
-                });
+                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH)
+                    .HasColumnName("country");
             });
 
             builder.Property(p => p.Weight)
@@ -131,11 +122,11 @@ namespace GetAPet.Infrastructure.Configurations
                 {
                     pdb.Property(pd => pd.Name)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
 
                     pdb.Property(pd => pd.Description)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_HIGH_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_LONG_TEXT_LENGTH);
                 });
             });
 
@@ -154,7 +145,7 @@ namespace GetAPet.Infrastructure.Configurations
 
                     pab.Property(ph => ph.PathToFile)
                     .IsRequired()
-                    .HasMaxLength(Constants.MAX_LOW_TEXT_LENGTH);
+                    .HasMaxLength(Constants.MAX_SHORT_TEXT_LENGTH);
                 });
             });
         }

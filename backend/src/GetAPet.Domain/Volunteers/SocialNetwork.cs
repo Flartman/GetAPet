@@ -1,16 +1,15 @@
-﻿using GetAPet.Domain.Shared;
-
+﻿
 namespace GetAPet.Domain.Volunteers
 {
     public record SocialNetwork
     {
         private SocialNetwork(string url, string name)
         {
-            URL = url;
+            Url = url;
             Name = name;
         }
 
-        public string URL { get; } = default!;
+        public string Url { get; } = default!;
 
         public string Name { get; } = default!;
 
@@ -22,7 +21,7 @@ namespace GetAPet.Domain.Volunteers
             if(string.IsNullOrWhiteSpace(url))
                 throw new ArgumentNullException(nameof(url));
 
-            return new(url, name);
+            return new SocialNetwork(url, name);
         }
     }
 }

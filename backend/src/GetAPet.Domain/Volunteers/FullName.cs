@@ -7,19 +7,22 @@ namespace GetAPet.Domain.Volunteers
     {
         private FullName(string surname, string name, string patronymic)
         {
-            Surname = new(surname);
-            Name = new(name);
-            Patronymic = new(patronymic);
+            Surname = surname;
+            Name = name;
+            Patronymic = patronymic;
         }
 
-        public NotEmptyString Surname { get; } = default!;
+        public string Surname { get; } = default!;
 
-        public NotEmptyString Name { get; } = default!;
+        public string Name { get; } = default!;
 
-        public NotEmptyString? Patronymic { get; }
+        public string? Patronymic { get; }
 
         public static FullName Create(string surname, string name, string patronymic = "")
         {
+            if (surname is null || name is null)
+                throw new ArgumentNullException();
+
             return new FullName(surname, name, patronymic);
         }
     }

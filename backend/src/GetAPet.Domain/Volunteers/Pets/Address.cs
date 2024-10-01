@@ -6,21 +6,23 @@ namespace GetAPet.Domain.Volunteers.Pets
     {
         private Address(string country, string region, string city)
         {
-            Country= new NotEmptyString(country);
-            Region = new NotEmptyString(region);
-            City = new NotEmptyString(city);
+            Country= country;
+            Region = region;
+            City = city;
         }
 
-        public NotEmptyString Country { get; } = default!;
+        public string Country { get; } = default!;
 
-        public NotEmptyString Region { get; } = default!;
+        public string Region { get; } = default!;
 
-        public NotEmptyString City { get; } = default!;
+        public string City { get; } = default!;
 
         public static Address Create(string country, string region, string city)
         {
-            return new Address(country, region, city);
+            if(country is null || region is null || city is null) 
+                throw new ArgumentNullException();
+            return new(country, region, city);
         }
-
+            
     }
 }
